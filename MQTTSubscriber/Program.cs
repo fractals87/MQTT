@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -24,7 +25,8 @@ namespace MQTTSubscriber
         static void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             // handle message received 
-            Console.WriteLine(sender.ToString());
+            string msg = Encoding.UTF8.GetString(e.Message);
+            Console.WriteLine($"Topic: {e.Topic}, Message: {msg}");
         }
     }
 }

@@ -18,10 +18,17 @@ namespace MQTTPublisher
                 string clientId = Guid.NewGuid().ToString();
                 client.Connect(clientId);
 
-                string strValue = Convert.ToString(20);
+                Random random = new Random();
+                Console.WriteLine("Avvio publisher completato");
 
                 // publish a message on "/home/temperature" topic with QoS 2 
-                client.Publish("/home/temperature", Encoding.UTF8.GetBytes(strValue), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                Console.WriteLine("0-exit 1-send");
+                int func;
+                do
+                {
+                    client.Publish("/home/temperature", Encoding.UTF8.GetBytes(random.Next().ToString()), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                    func = Console.Read();
+                } while (func != 0);
             }
             catch(Exception ex)
             {
